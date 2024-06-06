@@ -375,7 +375,6 @@ class Response {
       // check if out of space
       if (this.buff.length - this.offset < data.length) {
         const bytes = this.expand(MAPI_BLOCK_SIZE);
-        console.log(`expanding by ${bytes} bytes!`);
       }
 
       if (segment === undefined || (segment && segment.isFull())) {
@@ -926,8 +925,6 @@ class MapiConnection extends EventEmitter {
     if (resp.complete()) this.handleResponse(resp);
     bytesLeftOver = data.length - offset;
     if (bytesLeftOver) {
-      const msg = `some ${bytesLeftOver} bytes left over!`;
-      console.warn(msg);
       this.recv(data.subarray(offset));
     }
   }
